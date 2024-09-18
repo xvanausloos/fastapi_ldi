@@ -52,7 +52,6 @@ def get_post(id: int, response: Response):
         return {"message": "post with id was not found"} """
     return post
 
-# change by xav in main branch done in GH directly
 def find_index_post(id):
     for i, p in enumerate(my_posts):
         if p['id'] == id:
