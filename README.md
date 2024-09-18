@@ -8,6 +8,5 @@ change 2 for rebase
 change 4
 change 5
 
-change 6 feature2
 
-change main GH conflict
+change 7 feature 3
