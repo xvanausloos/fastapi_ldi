@@ -44,10 +44,9 @@ def get_posts():
 
 @app.post("/createposts", status_code=status.HTTP_201_CREATED)
 def create_posts(post: Post):
-    post_dict = post.dict()
-    post_dict['id'] = randrange(0, 100000)
-    my_posts.append(post_dict)
-    return {"data": post_dict}
+    # not vulnerable to SQL injection
+    cursor.execute("""INSERT INTO posts (title,content, published) VALUES (%s, %s, %s)""", (post.title, post.content, post.published))
+    return {"data": "created post"}
 
 @app.get("/posts/latest")
 def get_latest_post():
