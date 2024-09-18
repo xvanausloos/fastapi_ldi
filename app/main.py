@@ -45,7 +45,9 @@ def get_posts():
 @app.post("/createposts", status_code=status.HTTP_201_CREATED)
 def create_posts(post: Post):
     # not vulnerable to SQL injection
-    cursor.execute("""INSERT INTO posts (title,content, published) VALUES (%s, %s, %s)""", (post.title, post.content, post.published))
+    cursor.execute("""INSERT INTO posts (title,content, published) VALUES (%s, %s, %s) RETURNING * """, 
+                   (post.title, post.content, post.published))
+    new_post = cursor.fetchone()
     return {"data": "created post"}
 
 @app.get("/posts/latest")
